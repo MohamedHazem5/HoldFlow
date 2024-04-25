@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
@@ -19,12 +20,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HoldFlow.BL\HoldFlow.BL.csproj" />
     <ProjectReference Include="..\HoldFlow.DataAccess\HoldFlow.DataAccess.csproj" />
     <ProjectReference Include="..\HoldFlow.Models\HoldFlow.Models.csproj" />
-    <ProjectReference Include="..\HoldFlow.Services\HoldFlow.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldFlow", "HoldFlow\HoldFlow.csproj", "{C925EABF-949F-4C0C-BBBB-A36B2EBF04DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoldFlow", "HoldFlow\HoldFlow.csproj", "{C925EABF-949F-4C0C-BBBB-A36B2EBF04DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldFlow.DataAccess", "HoldFlow.DataAccess\HoldFlow.DataAccess.csproj", "{9335996E-FCDD-4359-A99C-4F046FD95070}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoldFlow.DataAccess", "HoldFlow.DataAccess\HoldFlow.DataAccess.csproj", "{9335996E-FCDD-4359-A99C-4F046FD95070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldFlow.Models", "HoldFlow.Models\HoldFlow.Models.csproj", "{60A119D3-76AC-4696-B045-C44F10CD6747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoldFlow.Models", "HoldFlow.Models\HoldFlow.Models.csproj", "{60A119D3-76AC-4696-B045-C44F10CD6747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldFlow.Services", "HoldFlow.Services\HoldFlow.Services.csproj", "{81641761-8716-411B-9974-BE57DB931E3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoldFlow.BL", "HoldFlow.BL\HoldFlow.BL.csproj", "{A441BC19-A59C-4A67-8E64-4B075D32AE73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{60A119D3-76AC-4696-B045-C44F10CD6747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60A119D3-76AC-4696-B045-C44F10CD6747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60A119D3-76AC-4696-B045-C44F10CD6747}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81641761-8716-411B-9974-BE57DB931E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81641761-8716-411B-9974-BE57DB931E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81641761-8716-411B-9974-BE57DB931E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81641761-8716-411B-9974-BE57DB931E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A441BC19-A59C-4A67-8E64-4B075D32AE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A441BC19-A59C-4A67-8E64-4B075D32AE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A441BC19-A59C-4A67-8E64-4B075D32AE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A441BC19-A59C-4A67-8E64-4B075D32AE73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
