@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BaseModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .category {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @foreach (var category in Model)
+        {
+            <div class="category">
+                <h2>@category.GetType().Name</h2>
+                @foreach (var prop in category.GetType().GetProperties())
+                {
+                    <p>@prop.Name: @prop.GetValue(category)</p>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿namespace HoldFlow.Models
 {
-    public class Inventory
+    public class Inventory : BaseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

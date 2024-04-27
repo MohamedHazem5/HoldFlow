@@ -5,45 +5,58 @@ namespace HoldFlow.DataAccess.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
-
+        private readonly ApplicationDbContext _dbContext;
         public Repository(ApplicationDbContext context)
         {
             _dbSet = context.Set<T>();
+            _dbContext = context;
+
         }
 
         public async Task<T> AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+            _dbContext.SaveChanges();
             return entity;
         }
 
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+            _dbContext.SaveChanges();
+
             return entities;
         }
 
         public T Update(T entity)
         {
             _dbSet.Update(entity);
+            _dbContext.SaveChanges();
+
             return entity;
         }
 
         public IEnumerable<T> UpdateRange(IEnumerable<T> entities)
         {
             _dbSet.UpdateRange(entities);
+            _dbContext.SaveChanges();
+
             return entities;
         }
 
         public T Delete(T entity)
         {
             _dbSet.Remove(entity);
+            _dbContext.SaveChanges();
+
             return entity;
         }
 
         public IEnumerable<T> DeleteRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
+            _dbContext.SaveChanges();
+
             return entities;
         }
 
