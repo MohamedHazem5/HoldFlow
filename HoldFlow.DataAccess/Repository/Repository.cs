@@ -47,6 +47,22 @@ namespace HoldFlow.DataAccess.Repository
             return entities;
         }
 
+        public async Task<IEnumerable<T>> GetBySpecification(Specification<T> specification)
+        {
+            var entities = specification.Criteria != null ? _dbSet.Where(specification.Criteria) : _dbSet;
+
+            if (specification.IncludeProperties != null)
+                entities = specification.IncludeProperties.Aggregate(entities, (record, property) => record.Include(property));
+
+            if (specification.OrderBy != null)
+                entities = entities.OrderBy(specification.OrderBy);
+
+            if (specification.OrderByDescending != null)
+                entities = entities.OrderByDescending(specification.OrderByDescending);
+
+            return await entities.ToListAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includeProperties)
         {
             var query = filter != null ? _dbSet.Where(filter) : _dbSet;

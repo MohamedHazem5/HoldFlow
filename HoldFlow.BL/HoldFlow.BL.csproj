@@ -16,4 +16,8 @@
     <ProjectReference Include="..\HoldFlow.DataAccess\HoldFlow.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
