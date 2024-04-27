@@ -1,7 +1,9 @@
-﻿using HoldFlow.BL.Interfaces;
+﻿using HoldFlow.BL;
+using HoldFlow.BL.Interfaces;
 using HoldFlow.BL.Managers;
 using HoldFlow.DataAccess.IRepository;
 using HoldFlow.DataAccess.Repository;
+using MailKit;
 
 namespace HoldFlow.Extentions
 {
@@ -13,9 +15,17 @@ namespace HoldFlow.Extentions
                  options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
+            
+            services.Configure<MailSettingsGmail>(configuration.GetSection("MailSettingsGmail"));
 
+            services.AddTransient<IEmailManager, EmailManager>();
             services.AddScoped<ICategoryManager, CategoryManager>();
             services.AddScoped<IInventoryManager, InventoryManager>();
+
+            services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<IImageManager, ImageManager>();
+            services.AddScoped<IImageRepository, ImageRepository>();
+
             return services;
         }
     }
