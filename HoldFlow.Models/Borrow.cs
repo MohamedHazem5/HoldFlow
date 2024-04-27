@@ -16,5 +16,8 @@ namespace HoldFlow.Models
         public User User { get; set; }
         public int PackageId { get; set; }
         public Package Package { get; set; }
+
+        public int AdminId { get; set; }
+        public User Admin { get; set; }
     }
 }

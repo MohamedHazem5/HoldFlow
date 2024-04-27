@@ -58,7 +58,16 @@ namespace HoldFlow.Models
                 .WithMany()
                 .HasForeignKey(x => x.PackageId)
                 .OnDelete(DeleteBehavior.NoAction);
-
+            builder.Entity<Order>()
+                .HasOne(x => x.Admin)
+                .WithMany()
+                .HasForeignKey(x => x.AdminId)
+                .OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Borrow>()
+                .HasOne(x => x.Admin)
+                .WithMany()
+                .HasForeignKey(x => x.AdminId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
 

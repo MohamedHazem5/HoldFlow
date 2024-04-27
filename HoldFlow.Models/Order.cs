@@ -12,5 +12,8 @@ namespace HoldFlow.Models
         public ICollection<OrderItem> Items { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public int AdminId { get; set; }
+        public User Admin { get; set; }
     }
 }
