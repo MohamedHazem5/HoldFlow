@@ -21,6 +21,7 @@ namespace HoldFlow.Extentions
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddScoped<ICategoryManager, CategoryManager>();
             services.AddScoped<IInventoryManager, InventoryManager>();
+            services.AddScoped<IAccountManager, AccountManager>();
 
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IImageManager, ImageManager>();
