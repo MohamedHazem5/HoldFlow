@@ -10,7 +10,7 @@ namespace HoldFlow.Models
         public DateTime DateOfBirth { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int ImageId { get; set; } = 10;
+        public int ImageId { get; set; } = 1;
         [AllowNull]
         public Image Image { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
