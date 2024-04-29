@@ -1,20 +1,16 @@
 ﻿@{
     Layout = null;
 }
-@model HoldFlow.Models.DTOs.RegisterDto
-
-
+@model HoldFlow.Models.DTOs.LoginDto
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <base href="~/" />
-
-        <title>HoldFlow</title>
+    <title>HoldFlow</title>
 
         <!-- GOOGLE FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
@@ -42,60 +38,60 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script src="plugins/nprogress/nprogress.js"></script>
-    </head>
+
+</head>
 <body class="bg-light-gray" id="body">
     <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh">
         <div class="d-flex flex-column justify-content-between">
             <div class="row justify-content-center">
-                <div class="col-lg-6 col-xl-5 col-md-10 ">
+                <div class="col-lg-6 col-md-10">
                     <div class="card card-default mb-0">
                         <div class="card-header pb-0">
                             <div class="app-brand w-100 d-flex justify-content-center border-bottom-0">
-                                <a class="w-auto pl-0" asp-controller="User" asp-action="Register">
+                                <a class="w-auto pl-0" asp-controller="Account" asp-action="Login">
                                     <img src="images/logo.png" alt="Mono">
                                     <span class="brand-name text-dark">HoldFlow</span>
                                 </a>
                             </div>
                         </div>
                         <div class="card-body px-5 pb-5 pt-0">
-                            <h4 class="text-dark text-center mb-5">Sign Up</h4>
-                            <form asp-action="RegisterUser" method="post">
+
+                            <h4 class="text-dark mb-6 text-center">Sign in for free</h4>
+
+                            <form asp-action="LoginProcess" method="post">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-4">
-                                        <input required type="text" asp-for="FirstName" class="form-control input-lg" id="firstname" aria-describedby="nameHelp" placeholder="FirstName">
-                                    </div>
-                                    <div class="form-group col-md-12 mb-4">
-                                        <input required type="text" asp-for="LastName" class="form-control input-lg" id="lastname" aria-describedby="nameHelp" placeholder="LastName">
-                                    </div>
-                                    <div class="form-group col-md-12 mb-4">
-                                        <input type="tel" asp-for="PhoneNumber" class="form-control input-lg" id="phonenumber" aria-describedby="nameHelp" placeholder="PhoneNumber +20">
-                                    </div>
-                                    <div class="form-group col-md-12 mb-4">
-                                        <input required type="email" asp-for="Email" class="form-control input-lg" id="email" aria-describedby="emailHelp" placeholder="Email">
+                                        <input type="email" asp-for="Email" class="form-control input-lg" id="email" aria-describedby="emailHelp"
+                                               placeholder="Email">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+
                                     </div>
                                     <div class="form-group col-md-12 ">
-                                        <input required type="password" asp-for="Password" class="form-control input-lg" id="password" placeholder="Password">
+                                        <input type="password" asp-for="Password" class="form-control input-lg" id="password" placeholder="Password">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-12">
+
                                         <div class="d-flex justify-content-between mb-3">
 
                                             <div class="custom-control custom-checkbox mr-3 mb-3">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                <label class="custom-control-label" for="customCheck2">I Agree the terms and conditions.</label>
+                                                <label class="custom-control-label" for="customCheck2">Remember me</label>
                                             </div>
+
+                                            <a class="text-color" href="#"> Forgot password? </a>
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-pill mb-4">Sign Up</button>
+                                        <button type="submit" class="btn btn-primary btn-pill mb-4">Sign In</button>
 
                                         <p>
-                                            Already have an account?
-                                            <a class="text-blue" asp-controller="User" asp-action="Login">Sign in</a>
+                                            Don't have an account yet ?
+                                            <a class="text-blue" asp-controller="Account" asp-action="Register">Sign Up</a>
                                         </p>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

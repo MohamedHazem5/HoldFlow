@@ -4,18 +4,20 @@ using HoldFlow.Models.DTOs;
 
 namespace HoldFlow.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         private readonly IAccountManager _accountManager;
 
-        public UserController(IAccountManager accountManager)
+        public AccountController(IAccountManager accountManager)
         {
             _accountManager = accountManager;
         }
+
         public IActionResult Login()
         {
             return View();
         }
+
         public IActionResult Register()
         {
             return View();
@@ -64,6 +66,13 @@ namespace HoldFlow.Controllers
         public IActionResult EmailConfirmationSuccess()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            _accountManager.Logout();
+
+            return RedirectToAction("Login", "Account");
         }
     }
 }

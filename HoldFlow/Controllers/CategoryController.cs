@@ -1,8 +1,10 @@
 ﻿using HoldFlow.BL.Interfaces;
 using HoldFlow.DataAccess.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HoldFlow.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryManager _manager;

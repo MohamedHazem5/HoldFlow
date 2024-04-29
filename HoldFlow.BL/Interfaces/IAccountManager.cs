@@ -8,6 +8,8 @@ namespace HoldFlow.BL.Interfaces
         public Task<AccountOperationResult> ConfirmEmail(string token, string email);
         public Task<AccountOperationResult> LoginUser(LoginDto loginDto);
 
+        public Task Logout();
+
 
     }
 }

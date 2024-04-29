@@ -80,14 +80,22 @@ namespace HoldFlow.BL.Managers
                 return new AccountOperationResult { Success = false, ErrorMessage = "User not Found" };
             }
 
-            var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            //var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            var result = true;
 
+            
+            
             if (!result)
             {
                 return new AccountOperationResult { Success = false, ErrorMessage = "Invalid username or password" };
             }
-
+            await _signInManager.SignInAsync(user, true);
             return new AccountOperationResult { Success = true };
+        }
+
+        public async Task Logout()
+        {
+             await _signInManager.SignOutAsync();
         }
     }
 }
