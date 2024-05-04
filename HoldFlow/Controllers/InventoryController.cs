@@ -1,4 +1,5 @@
 ﻿using HoldFlow.BL.Interfaces;
+using HoldFlow.Models.DTOs;
 
 namespace HoldFlow.Controllers
 {
@@ -11,24 +12,14 @@ namespace HoldFlow.Controllers
             _manager = manager;
         }
 
-        // GET: Inventory
         public async Task<IActionResult> Index()
         {
-            var inventories = await _manager.GetAllAsync(); 
-                                                            
+            var inventories = await _manager.GetInventories();
             return View("~/Views/Category/Index.cshtml", inventories);
         }
-
-
-        // GET: Inventory/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var inventory = _manager.FirstOrDefaultAsync(i => i.Id == id);
+            var inventory =await _manager.GetInventoryById(id);
             if (inventory == null)
             {
                 return NotFound();
@@ -36,35 +27,25 @@ namespace HoldFlow.Controllers
 
             return View(inventory);
         }
-
-        // GET: Inventory/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Inventory/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name")] Inventory inventory)
+        public async Task<IActionResult> Create(InventoryDto inventory)
         {
             if (ModelState.IsValid)
             {
-                _manager.AddAsync(inventory);
+                await _manager.AddInventory(inventory);
                 return RedirectToAction(nameof(Index));
             }
             return View(inventory);
         }
 
-        // GET: Inventory/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var inventory = _manager.FirstOrDefaultAsync(i => i.Id == id);
+            var inventory = await _manager.GetInventoryById(id);
 
             if (inventory == null)
             {
@@ -74,39 +55,37 @@ namespace HoldFlow.Controllers
             return View(inventory);
         }
 
-        // POST: Inventory/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Name")] Inventory inventory)
+        [HttpPut]
+        public async Task<IActionResult> Edit(InventoryDto inventory)
         {
-            if (id != inventory.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                _manager.Update(inventory);
+                await _manager.UpdateInventory(inventory);
                 return RedirectToAction(nameof(Index));
             }
             return View(inventory);
         }
-
-        // GET: Inventory/Delete/5
-        public IActionResult Delete(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var inventory = _manager.FirstOrDefaultAsync(i => i.Id == id);
+            var inventory = await _manager.GetInventoryById(id);
             if (inventory == null)
             {
                 return NotFound();
             }
 
             return View(inventory);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(InventoryDto inventoryDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _manager.DeleteInventory(inventoryDto.Id);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿@model BaseModel
+
+@{
+    string typeName = Model.GetType().Name;
+    string modifiedName = typeName.Substring(0, typeName.Length - 3);
+}
+
+<div class="card card-default ">
+    <div class="card-header container">
+        <h2>@modifiedName</h2>
+
+        <a class="btn mdi mdi-code-tags" data-toggle="collapse" href="#collapse-table-bordered" role="button"
+           aria-expanded="false" aria-controls="collapse-table-bordered"> </a>
+    </div>
+    <div class="card-body">
+        <div class="collapse" id="collapse-table-bordered">
+        </div>
+        @foreach(var data in Model.GetType().GetProperties())
+        {
+            <p>@data.Name: @data.GetValue(Model) </p>
+        }
+    </div>
+</div>

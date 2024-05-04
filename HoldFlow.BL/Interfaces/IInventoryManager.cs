@@ -10,6 +10,6 @@ namespace HoldFlow.BL.Interfaces
 
         Task<InventoryDto> GetInventoryById(int id);
 
-        Task<IEnumerable<InventoryDto>> GetCategories();
+        Task<IEnumerable<InventoryDto>> GetInventories();
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HoldFlow.Models.DTOs
+﻿namespace HoldFlow.Models.DTOs
 {
-    public class CategoryDto
+    public class CategoryDto : BaseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

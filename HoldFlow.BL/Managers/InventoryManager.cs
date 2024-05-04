@@ -36,7 +36,7 @@ namespace HoldFlow.BL.Managers
             return inventoryDto;
         }
 
-        public async Task<IEnumerable<InventoryDto>> GetCategories()
+        public async Task<IEnumerable<InventoryDto>> GetInventories()
         {
             var entities = await _repository.GetAllAsync();
             var inventoryDtos = entities.Select(x => new InventoryDto

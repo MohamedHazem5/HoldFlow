@@ -1,39 +1,69 @@
 ﻿@model IEnumerable<BaseModel>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Categories</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+@{
+string typeName = Model.First().GetType().Name;
+string modifiedName = typeName.Substring(0, typeName.Length - 3);
+}
 
-        .container {
-            text-align: center;
-        }
+<!-- Bordered Table -->
+<div class="card card-default ">
+    <div class="card-header container">
+        <h2>@modifiedName</h2>
 
-        .category {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        @foreach (var category in Model)
-        {
-            <div class="category">
-                <h2>@category.GetType().Name</h2>
-                @foreach (var prop in category.GetType().GetProperties())
-                {
-                    <p>@prop.Name: @prop.GetValue(category)</p>
-                }
-            </div>
-        }
+        <a class="btn mdi mdi-code-tags" data-toggle="collapse" href="#collapse-table-bordered" role="button"
+           aria-expanded="false" aria-controls="collapse-table-bordered"> </a>
     </div>
-</body>
-</html>
+    <div class="card-body">
+        <div class="collapse" id="collapse-table-bordered">
+            <pre class="language-html mb-4">
+<code>
+</code>
+          </pre>
+        </div>
+        <table class="table table-bordered container">
+
+            <thead>
+                <tr>
+                    @foreach (var prop in Model.First().GetType().GetProperties())
+                    {
+                        <th scope="col">@prop.Name</th>
+                    }
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var data in Model)
+                {
+                   
+                    <tr>
+
+                        @foreach (var prop in data.GetType().GetProperties())
+                        {
+                            
+
+                            <td>
+                                <a asp-controller="@modifiedName" asp-action="Details" asp-route-id="@data.GetType().GetProperty("Id")?.GetValue(data)">
+                                    @prop.GetValue(data)
+                                </a>
+                                 </td>
+
+
+                        }
+                        <th class="text-center">
+                            <a href="#">
+                                <i class="mdi mdi-open-in-new"></i>
+                            </a>
+                            <a href="#">
+                                <i class="mdi mdi-close text-danger"></i>
+                            </a>
+
+                        </th>
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

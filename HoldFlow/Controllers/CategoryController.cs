@@ -1,5 +1,6 @@
 ﻿using HoldFlow.BL.Interfaces;
 using HoldFlow.DataAccess.IRepository;
+using HoldFlow.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 
 namespace HoldFlow.Controllers
@@ -13,23 +14,14 @@ namespace HoldFlow.Controllers
         {
             _manager = manager;
         }
-
-        // GET: Category
         public async Task<IActionResult> Index()
         {
-            var categories = await _manager.GetAllAsync(); 
+            var categories = await _manager.GetCategories(); 
             return View("Index", categories);
         }
-
-        // GET: Category/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var category = _manager.FirstOrDefaultAsync(i=>i.Id==id);
+            var category =await _manager.GetCategoryById(id);
             if (category == null)
             {
                 return NotFound();
@@ -37,35 +29,25 @@ namespace HoldFlow.Controllers
 
             return View(category);
         }
-
-        // GET: Category/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Category/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Create(CategoryDto category)
         {
             if (ModelState.IsValid)
             {
-                _manager.AddAsync(category);
+                await _manager.AddCategory(category);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
-        // GET: Category/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var category = _manager.FirstOrDefaultAsync(i => i.Id == id);
+            var category = await _manager.GetCategoryById(id);
 
             if (category == null)
             {
@@ -75,33 +57,20 @@ namespace HoldFlow.Controllers
             return View(category);
         }
 
-        // POST: Category/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Name")] Category category)
+        [HttpPut]
+        public async Task<IActionResult> Edit(CategoryDto category)
         {
-            if (id != category.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                _manager.Update(category);
+                await _manager.UpdateCategory(category);
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
-
-        // GET: Category/Delete/5
-        public IActionResult Delete(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var category = _manager.FirstOrDefaultAsync(i => i.Id == id);
+            var category = await _manager.GetCategoryById(id);
             if (category == null)
             {
                 return NotFound();
@@ -110,5 +79,15 @@ namespace HoldFlow.Controllers
             return View(category);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(CategoryDto categoryDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _manager.DeleteCategory(categoryDto.Id);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
     }
 }
