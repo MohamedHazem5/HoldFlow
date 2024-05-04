@@ -17,7 +17,7 @@ namespace HoldFlow.BL.Managers
             _emailService = emailManager;
         }
 
-        public async Task<AccountOperationResult> RegisterUser(RegisterDto registerDto)
+        public async Task<OperationResult> RegisterUser(RegisterDto registerDto)
         {
             var user = new User
             {
@@ -34,69 +34,66 @@ namespace HoldFlow.BL.Managers
 
             if (!result.Succeeded)
             {
-                return new AccountOperationResult { Success = false, Errors = result.Errors.Select(e => e.Description) };
+                return new OperationResult { Success = false, Errors = result.Errors.Select(e => e.Description) };
             }
-/*
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), new { token, email = user.Email });
+            /*
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var confirmationLink = Url.Action(nameof(ConfirmEmail), new { token, email = user.Email });
 
-            await _emailService.SendEmailAsync(user.Email, "Confirm Your Email", confirmationLink.ToString());
-*/
+                        await _emailService.SendEmailAsync(user.Email, "Confirm Your Email", confirmationLink.ToString());
+            */
             await _signInManager.SignInAsync(user, true);
 
-            return new AccountOperationResult { Success = true };
+            return new OperationResult { Success = true };
         }
 
-        public async Task<AccountOperationResult> ConfirmEmail(string token, string email)
+        public async Task<OperationResult> ConfirmEmail(string token, string email)
         {
             if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(email))
             {
-                return new AccountOperationResult { Success = false, ErrorMessage = "Token or email is missing." };
+                return new OperationResult { Success = false, ErrorMessage = "Token or email is missing." };
             }
 
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return new AccountOperationResult { Success = false, ErrorMessage = "User not found." };
+                return new OperationResult { Success = false, ErrorMessage = "User not found." };
             }
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                return new AccountOperationResult { Success = true };
+                return new OperationResult { Success = true };
             }
             else
             {
-                return new AccountOperationResult { Success = false, ErrorMessage = "Email confirmation failed." };
+                return new OperationResult { Success = false, ErrorMessage = "Email confirmation failed." };
             }
         }
 
-        public async Task<AccountOperationResult> LoginUser(LoginDto loginDto)
+        public async Task<OperationResult> LoginUser(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user == null)
             {
-                return new AccountOperationResult { Success = false, ErrorMessage = "User not Found" };
+                return new OperationResult { Success = false, ErrorMessage = "User not Found" };
             }
 
             //var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             var result = true;
 
-            
-            
             if (!result)
             {
-                return new AccountOperationResult { Success = false, ErrorMessage = "Invalid username or password" };
+                return new OperationResult { Success = false, ErrorMessage = "Invalid username or password" };
             }
             await _signInManager.SignInAsync(user, true);
-            return new AccountOperationResult { Success = true };
+            return new OperationResult { Success = true };
         }
 
         public async Task Logout()
         {
-             await _signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
     }
 }
-

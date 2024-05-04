@@ -2,14 +2,14 @@
 
 namespace HoldFlow.BL.Interfaces
 {
-    public interface IAccountManager 
+    public interface IAccountManager
     {
-        public  Task<AccountOperationResult> RegisterUser(RegisterDto registerDto);
-        public Task<AccountOperationResult> ConfirmEmail(string token, string email);
-        public Task<AccountOperationResult> LoginUser(LoginDto loginDto);
+        public Task<OperationResult> RegisterUser(RegisterDto registerDto);
+
+        public Task<OperationResult> ConfirmEmail(string token, string email);
+
+        public Task<OperationResult> LoginUser(LoginDto loginDto);
 
         public Task Logout();
-
-
     }
 }

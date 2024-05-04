@@ -2,3 +2,4 @@
 global using System.Linq.Expressions;
 global using HoldFlow.DataAccess.IRepository;
 global using HoldFlow.BL.Interfaces;
+global using HoldFlow.Models.DTOs;

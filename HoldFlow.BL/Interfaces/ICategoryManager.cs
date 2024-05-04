@@ -2,6 +2,14 @@ namespace HoldFlow.BL.Interfaces
 {
     public interface ICategoryManager : IManager<Category>
     {
-        // Define manager methods here
+        Task<CategoryDto> AddCategory(CategoryDto categoryDto);
+
+        Task<CategoryDto> UpdateCategory(CategoryDto categoryDto);
+
+        Task<CategoryDto> DeleteCategory(int id);
+
+        Task<CategoryDto> GetCategoryById(int id);
+
+        Task<IEnumerable<CategoryDto>> GetCategories();
     }
 }
