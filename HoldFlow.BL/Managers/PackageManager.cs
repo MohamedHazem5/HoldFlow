@@ -44,7 +44,7 @@ namespace HoldFlow.BL.Managers
             return packageDto;
         }
 
-        public async Task<IEnumerable<GetPackageDto>> GetCategories()
+        public async Task<IEnumerable<GetPackageDto>> GetPackages()
         {
             var entities = await _repository.GetAllAsync(null, pk => pk.Inventory, pk => pk.Product.Category, pk => pk.Product.Image);
             var packageDtos = entities.Select(x => new GetPackageDto

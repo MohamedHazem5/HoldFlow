@@ -14,21 +14,19 @@ namespace HoldFlow.Controllers
         {
             _manager = manager;
         }
+
         public async Task<IActionResult> Index()
         {
-            var categories = await _manager.GetCategories(); 
+            var categories = await _manager.GetCategories();
             return View("Index", categories);
         }
+
         public async Task<IActionResult> Details(int id)
         {
-            var category =await _manager.GetCategoryById(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
+            var category = await _manager.GetCategoryById(id);
+            return category != null ? View(category) : NotFound();
         }
+
         public IActionResult Create()
         {
             return View();
@@ -37,57 +35,46 @@ namespace HoldFlow.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoryDto category)
         {
-            if (ModelState.IsValid)
-            {
-                await _manager.AddCategory(category);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            if (!ModelState.IsValid)
+                return View(category);
+
+            await _manager.AddCategory(category);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int id)
         {
             var category = await _manager.GetCategoryById(id);
 
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
+            return category != null ? View(category) : NotFound();
         }
 
         [HttpPut]
         public async Task<IActionResult> Edit(CategoryDto category)
         {
-            if (ModelState.IsValid)
-            {
-                await _manager.UpdateCategory(category);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            if (!ModelState.IsValid)
+                return View(category);
+
+            await _manager.UpdateCategory(category);
+            return RedirectToAction(nameof(Index));
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var category = await _manager.GetCategoryById(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
 
-            return View(category);
+            return category != null ? View(category) : NotFound();
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(CategoryDto categoryDto)
         {
-            if (ModelState.IsValid)
-            {
-                await _manager.DeleteCategory(categoryDto.Id);
-                return RedirectToAction(nameof(Index));
-            }
-            return View();
+            if (!ModelState.IsValid)
+                return View();
+
+            await _manager.DeleteCategory(categoryDto.Id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

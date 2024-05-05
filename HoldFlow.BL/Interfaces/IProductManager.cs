@@ -10,6 +10,6 @@ namespace HoldFlow.BL.Interfaces
 
         Task<GetProductDto> GetProductById(int id);
 
-        Task<IEnumerable<GetProductDto>> GetCategories();
+        Task<IEnumerable<GetProductDto>> GetProducts();
     }
 }

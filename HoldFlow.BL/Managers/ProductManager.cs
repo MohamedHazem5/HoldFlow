@@ -37,7 +37,7 @@ namespace HoldFlow.BL.Managers
             return productDto;
         }
 
-        public async Task<IEnumerable<GetProductDto>> GetCategories()
+        public async Task<IEnumerable<GetProductDto>> GetProducts()
         {
             var entity = await _repository.GetAllAsync(null, p => p.Category, p => p.Image);
             var productDtos = entity.Select(x => new GetProductDto

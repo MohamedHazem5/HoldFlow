@@ -10,6 +10,6 @@ namespace HoldFlow.BL.Interfaces
 
         Task<GetPackageDto> GetPackageById(int id);
 
-        Task<IEnumerable<GetPackageDto>> GetCategories();
+        Task<IEnumerable<GetPackageDto>> GetPackages();
     }
 }
