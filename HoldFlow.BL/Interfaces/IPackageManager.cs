@@ -9,6 +9,7 @@ namespace HoldFlow.BL.Interfaces
         Task<DeletePackageDto> DeletePackage(int id);
 
         Task<GetPackageDto> GetPackageById(int id);
+        Task<StatusOrderDto> UpdateStocksInPackage(List<OrderItem> orderItemsList);
 
         Task<IEnumerable<GetPackageDto>> GetPackages();
     }
