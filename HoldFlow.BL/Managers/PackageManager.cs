@@ -119,5 +119,25 @@ namespace HoldFlow.BL.Managers
             };
             return getPackageDto;
         }
+
+
+        public async Task<StatusOrderDto> UpdateStocksInPackage(List<OrderItem> orderItemsList)
+        {
+            try
+            {
+                foreach (var orderItem in orderItemsList)
+                {
+                    var package = orderItem.Package;
+                    package.left -= orderItem.Quantity;
+                    _repository.Update(package);
+                }
+
+                return new StatusOrderDto { Message = "Package stock updated and order items deleted successfully" };
+            }
+            catch (Exception)
+            {
+                return new StatusOrderDto { Message = "An error occurred while updating package stock and deleting order items." };
+            }
+        }
     }
 }

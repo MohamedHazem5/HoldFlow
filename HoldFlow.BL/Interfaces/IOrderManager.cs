@@ -2,6 +2,10 @@ namespace HoldFlow.BL.Interfaces
 {
     public interface IOrderManager : IManager<Order>
     {
-        // Define manager methods here
+        Task<GetOrderDto> GetOrderById(int id);
+        Task<IEnumerable<GetOrderDto>> GetOrders();
+        Task<StatusOrderDto> ConfirmOrder(int orderId);
+        Task<StatusOrderDto> DenyOrder(int orderId);
+
     }
 }
